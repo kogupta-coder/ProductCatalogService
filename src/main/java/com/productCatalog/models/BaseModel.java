@@ -1,7 +1,6 @@
 package com.productCatalog.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,9 +8,9 @@ import java.util.Date;
 
 
 @MappedSuperclass
-@Entity
 public  abstract class BaseModel {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // AUTO INCREMENT.
     Long id;
     Date createdAt;
     Date lastModifiedAt;

@@ -6,8 +6,8 @@ import lombok.Setter;
 
 
 
-@Entity
-public class Category {
+@Entity(name="categories")
+public class Category extends BaseModel{
     String title;
 
     public String getTitle() {

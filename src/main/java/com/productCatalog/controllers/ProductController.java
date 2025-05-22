@@ -1,6 +1,7 @@
 package com.productCatalog.controllers;
 
 import com.productCatalog.dtos.ExceptionDto;
+import com.productCatalog.exceptions.CategoryNotFoundException;
 import com.productCatalog.exceptions.ProductNotFoundException;
 import com.productCatalog.models.Product;
 import com.productCatalog.services.ProductService;
@@ -18,7 +19,7 @@ public class ProductController {
 
     ProductService service;
 
-    ProductController(@Qualifier("fakeProductService") ProductService service)
+    ProductController(@Qualifier("selfProductService") ProductService service)
     {
         this.service=service;
     }
@@ -57,9 +58,8 @@ public class ProductController {
     }
 
     @PostMapping()
-    public boolean createProduct(@RequestBody Product product)
-    {
-        return false;
+    public Product createProduct(@RequestBody Product product) throws CategoryNotFoundException {
+        return  service.createProduct(product);
     }
 
     @DeleteMapping("/{id}")
@@ -69,17 +69,17 @@ public class ProductController {
     }
 
 
-    //This method will get priority if anything happens within this controller
-    @ExceptionHandler(RuntimeException.class)
-            public ResponseEntity<ExceptionDto> handleRunTimeExceptionWithinController()
-    {
-        ExceptionDto exceptionDto = new ExceptionDto();
-        exceptionDto.setMessage("Something went Wrong from Controller");
-        exceptionDto.setResolutionMethod("Please try again later");
-
-        return new ResponseEntity<>(
-                exceptionDto,
-                HttpStatus.UNAUTHORIZED);
-    }
+//    //This method will get priority if anything happens within this controller
+//    @ExceptionHandler(RuntimeException.class)
+//            public ResponseEntity<ExceptionDto> handleRunTimeExceptionWithinController()
+//    {
+//        ExceptionDto exceptionDto = new ExceptionDto();
+//        exceptionDto.setMessage("Something went Wrong from Controller");
+//        exceptionDto.setResolutionMethod("Please try again later");
+//
+//        return new ResponseEntity<>(
+//                exceptionDto,
+//                HttpStatus.UNAUTHORIZED);
+//    }
 
 }
