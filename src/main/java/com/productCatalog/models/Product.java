@@ -1,9 +1,9 @@
 package com.productCatalog.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.Getter;
-import lombok.Setter;
 
 
 @Entity(name="products")
@@ -11,8 +11,9 @@ public class Product extends BaseModel {
     private String title;
     private Double price;
     private String description;
-    private String imageUrl;
-    @ManyToOne
+    private String imgUrl;
+    @ManyToOne(cascade=CascadeType.PERSIST) //by default fetch type eager
+    @JoinColumn
     private Category category;
 
     public String getTitle() {
@@ -39,12 +40,12 @@ public class Product extends BaseModel {
         this.description = description;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public Category getCategory() {

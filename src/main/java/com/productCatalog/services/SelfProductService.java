@@ -24,6 +24,8 @@ public class SelfProductService implements ProductService{
 
     @Override
     public Product getSingleProduct(Long id) throws ProductNotFoundException {
+//        Optional<Product> optionalProduct = productRepository.findById(id);
+
       return  productRepository.findById(id).orElseThrow(()->new ProductNotFoundException(id,"Product is not FOund"));
     }
 
@@ -34,20 +36,20 @@ public class SelfProductService implements ProductService{
 
     @Override
     public Product createProduct(Product product) throws CategoryNotFoundException {
-       Category category = product.getCategory();
-       if(category==null)
-       {
-           throw new CategoryNotFoundException("Product cant be created without category");
-       }
-       Optional<Category> optionalCategory = categoryRepository.findByTitle(category.getTitle());
-       if(optionalCategory.isEmpty())
-       {
-           category=categoryRepository.save(category);
-       }
-       else {
-           category=optionalCategory.get();
-       }
-       product.setCategory(category);
+//       Category category = product.getCategory();
+//       if(category==null)
+//       {
+//           throw new CategoryNotFoundException("Product cant be created without category");
+//       }
+//       Optional<Category> optionalCategory = categoryRepository.findByTitle(category.getTitle());
+//       if(optionalCategory.isEmpty())
+//       {
+//           category=categoryRepository.save(category);
+//       }
+//       else {
+//           category=optionalCategory.get();
+//       }
+//       product.setCategory(category);
       product= productRepository.save(product);
       return product;
     }
