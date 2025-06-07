@@ -1,6 +1,5 @@
-package com.example.ProductCatalogService;
+package com.productCatalog;
 
-import com.productCatalog.ProductCatalogService.ProductCatalogServiceApplication;
 import com.productCatalog.models.Category;
 import com.productCatalog.models.Product;
 import com.productCatalog.repository.CategoryRepository;
@@ -14,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest(classes = ProductCatalogServiceApplication.class)
+
 class ProductCatalogServiceApplicationTests {
 	@Autowired
 	private ProductRepository productRepository;

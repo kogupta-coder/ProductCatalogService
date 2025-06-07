@@ -5,6 +5,7 @@ import com.productCatalog.exceptions.ProductNotFoundException;
 import com.productCatalog.models.Category;
 import com.productCatalog.models.Product;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
