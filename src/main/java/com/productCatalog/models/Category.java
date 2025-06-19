@@ -1,5 +1,6 @@
 package com.productCatalog.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -14,6 +15,7 @@ public class Category extends BaseModel{
     String title;
 
     @OneToMany(fetch=jakarta.persistence.FetchType.LAZY,mappedBy ="category",cascade = CascadeType.REMOVE)
+    @JsonIgnore // Prevents infinite recursion during serialization
     List<Product> products;
 
     public List<Product> getProducts() {

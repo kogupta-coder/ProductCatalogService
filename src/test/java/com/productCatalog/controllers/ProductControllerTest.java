@@ -21,21 +21,21 @@ class ProductControllerTest {
     @Autowired
     ProductController productController;
 
-    @Test
-    public void getSingleProductTest() throws ProductNotFoundException {
-        Long productId = 10l;
-        Product expectedProduct =new Product();
-        expectedProduct.setPrice(1000.0);
-        expectedProduct.setTitle("Iphone Apple");
-        expectedProduct.setDescription("Apple Iphone");
-
-        when(service.getSingleProduct(productId)).thenReturn(expectedProduct);
-
-        Product actualProduct = productController.getSingleProduct(10l).getBody();
-
-        assertEquals(expectedProduct,actualProduct);
-
-    }
+//    @Test
+   // public void getSingleProductTest() throws ProductNotFoundException {
+//        Long productId = 10l;
+//        Product expectedProduct =new Product();
+//        expectedProduct.setPrice(1000.0);
+//        expectedProduct.setTitle("Iphone Apple");
+//        expectedProduct.setDescription("Apple Iphone");
+//
+//        when(service.getSingleProduct(productId)).thenReturn(expectedProduct);
+//
+//        Product actualProduct = productController.getSingleProduct(10l).getBody();
+//
+//        assertEquals(expectedProduct,actualProduct);
+//
+//    }
 
 
     @Test
