@@ -19,7 +19,7 @@ public class ProductController {
 
     ProductService service;
 
-    ProductController(@Qualifier("selfProductService") ProductService service)
+    ProductController(@Qualifier("fakeProductService") ProductService service)
     {
         this.service=service;
     }

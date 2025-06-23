@@ -7,11 +7,12 @@ import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.List;
 
 
 @Entity(name="categories")
-public class Category extends BaseModel{
+public class Category extends BaseModel implements Serializable {
     String title;
 
     @OneToMany(fetch=jakarta.persistence.FetchType.LAZY,mappedBy ="category",cascade = CascadeType.REMOVE)
