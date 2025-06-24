@@ -8,6 +8,9 @@ import com.productCatalog.repository.CategoryRepository;
 import com.productCatalog.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,5 +60,12 @@ public class SelfProductService implements ProductService{
     @Override
     public boolean deleteProduct(Long productId) {
         return false;
+    }
+
+
+    public Page<Product> getProductsByTitle(String title, int pageNo, int pageSize) {
+        Sort sort = Sort.by(Sort.Direction.ASC,"price");
+             return productRepository.findByTitleContainsIgnoreCase(title, PageRequest.of(pageNo, pageSize,sort));
+            // return productRepository.findByTitleContainsIgnoreCase(title, PageRequest.of(pageNo, pageSize));
     }
 }

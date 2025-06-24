@@ -7,6 +7,7 @@ import com.productCatalog.models.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -87,6 +88,11 @@ Product product = (Product) redisTemplate.opsForHash().get("PRODUCTS", "PRODUCT_
     @Override
     public boolean deleteProduct(Long productId) {
         return false;
+    }
+
+    @Override
+    public Page<Product> getProductsByTitle(String title, int pageNo, int pageSize) {
+        return null;
     }
 
     public Product convertFaKeStoreProductToProduct(FakeStoreProductDto productDto)

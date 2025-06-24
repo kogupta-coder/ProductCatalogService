@@ -6,6 +6,7 @@ import com.productCatalog.exceptions.ProductNotFoundException;
 import com.productCatalog.models.Product;
 import com.productCatalog.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class ProductController {
 
     ProductService service;
 
-    ProductController(@Qualifier("fakeProductService") ProductService service)
+    ProductController(@Qualifier("selfProductService") ProductService service)
     {
         this.service=service;
     }
@@ -67,6 +68,20 @@ public class ProductController {
     {
         return null;
     }
+
+    //http://localhost:8080/products/title?title=iphone&pageNo=0&pageSize=3
+    @GetMapping("/title")
+    public Page<Product> getProductByTitle(@RequestParam("title") String title,
+                                           @RequestParam("pageNo") int pageNo,
+                                           @RequestParam("pageSize") int pageSize) throws ProductNotFoundException {
+        Page<Product> products = service.getProductsByTitle(title, pageNo, pageSize);
+        if(products==null || products.isEmpty())
+        {
+            throw new ProductNotFoundException("No Products found with title: " + title);
+        }
+       return products;
+    }
+
 
 
 //    //This method will get priority if anything happens within this controller
