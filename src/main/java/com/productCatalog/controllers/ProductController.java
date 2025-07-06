@@ -1,10 +1,13 @@
 package com.productCatalog.controllers;
 
+import com.productCatalog.commons.AuthCommons;
 import com.productCatalog.dtos.ExceptionDto;
+import com.productCatalog.dtos.UserDto;
 import com.productCatalog.exceptions.CategoryNotFoundException;
 import com.productCatalog.exceptions.ProductNotFoundException;
 import com.productCatalog.models.Product;
 import com.productCatalog.services.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -20,7 +23,10 @@ public class ProductController {
 
     ProductService service;
 
-    ProductController(@Qualifier("selfProductService") ProductService service)
+   @Autowired
+    AuthCommons authCommons;
+
+    ProductController(@Qualifier("fakeProductService") ProductService service)
     {
         this.service=service;
     }
@@ -36,6 +42,7 @@ public class ProductController {
         @GetMapping("/{id}")
     public ResponseEntity<Product> getSingleProduct(@PathVariable("id") long id) throws ProductNotFoundException
     {
+        UserDto userDto = authCommons.validateToken("SampleToken");
         ResponseEntity<Product> response= new ResponseEntity<>(service.getSingleProduct(id),HttpStatus.OK);
 //        ResponseEntity<Product> response = null;
 //        Product product=null;
